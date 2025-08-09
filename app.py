@@ -4,7 +4,9 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
+# Configuration for the SQLite database
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db' 
+# Set the path for the database file
 db = SQLAlchemy(app)
 
 class Todo(db.Model):
@@ -34,6 +36,7 @@ def index():
             return redirect('/')
         except:
             return 'There was an issue adding your task'
+        
     else:
         tasks = Todo.query.order_by(Todo.date_created).all()
         return render_template('index.html', tasks = tasks)
@@ -51,8 +54,9 @@ def delete(id):
         return 'There was a problem deleting that task'
 
 # UPDATE TASK WITH FORM'S INFORMATION
-@app.route('/update/<int:id>', methods=['POST', 'GET'])
+@app.route('/update/<int:id>', methods=['POST'])
 def update(id):
+    # Get the task by ID
     task = Todo.query.get_or_404(id)
     if request.method == 'POST':
         task.content = request.form['content']
@@ -68,7 +72,8 @@ def update(id):
         except:
             return 'There was an issue updating your task'
     else:
-        return render_template('update.html', task=task)
+        return redirect('/')
+        # return render_template('update.html', task=task)
 
 # DELETE DATABASE
 @app.route('/delete-db')

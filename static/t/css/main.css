@@ -1,0 +1,12 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    background-image: url('../img/Fondo-imagen-landing.jpg');
+    background-size: cover;          /* La imagen cubrirá toda el área */
+    background-repeat: no-repeat;    /* La imagen no se repetirá */
+    background-attachment: fixed;    /* Fija la imagen para que no se mueva al hacer scroll */
+    background-position: center;     /* Centra la imagen en el fondo */
+}

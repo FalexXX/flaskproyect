@@ -1,0 +1,40 @@
+<div class="modal fade" id="editModal{{task.id}}" tabindex="-1" aria-labelledby="editModalLabel{{task.id}}" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="/update/{{task.id}}" method="POST">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="editModalLabel{{task.id}}">Editar Tarea {{task.id}}</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="content" class="form-label">Contenido de la tarea</label>
+                        <input type="text" class="form-control" name="content" id="content" value="{{task.content}}" required/>
+                    </div>
+                    <div class="mb-3">
+                        <label for="priority" class="form-label">Prioridad</label>
+                        <select class="form-select" name="priority" id="priority" required>
+                            <option value="{{ task.priority }}" selected>{{ task.priority }}</option>
+                            {% for i in range(1, 6) %}
+                                {% if i != task.priority %}
+                                    <option value="{{i}}">{{i}}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="status" class="form-label">Estado</label>
+                        <select class="form-select" name="status" id="status" required>
+                            <option value="true" {% if task.status %} selected {% endif %}>Activo</option>
+                            <option value="false" {% if not task.status %} selected {% endif %}>Inactivo</option>
+                        </select>
+                    </div>
+                    </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
