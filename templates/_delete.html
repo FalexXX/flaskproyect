@@ -1,0 +1,20 @@
+
+
+<!-- Modal -->
+<div class="modal fade" id="deleteModal{{task.id}}" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5 fw-bold" id="deleteModalLabel">Delete Confirmation</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body fw-semibold">
+        Are you sure you want to delete the task "{{task.content}}" with the id "{{task.id}}"?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Back</button>
+        <a href="/delete/{{task.id}}" class="btn btn-danger" role="button">Go ahead</a>
+      </div>
+    </div>
+  </div>
+</div>
