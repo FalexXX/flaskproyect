@@ -40,7 +40,28 @@ def index():
     else:
         tasks = Todo.query.order_by(Todo.date_created).all()
         return render_template('index.html', tasks = tasks)
+    
+# Filter tasks by status
+# app.py
 
+@app.route('/filter/<status>')
+def filter_tasks(status):
+    if status == 'true':
+        tasks = Todo.query.filter_by(status=True).order_by(Todo.date_created).all()
+    elif status == 'false':
+        tasks = Todo.query.filter_by(status=False).order_by(Todo.date_created).all()
+    else:  # Maneja el caso 'all' o cualquier otro valor
+        tasks = Todo.query.order_by(Todo.date_created).all()
+    
+    return render_template('index.html', tasks=tasks)
+
+# FILTER task by content
+
+@app.route('/filter/content', methods=['POST'])
+def search():
+    search_query = request.form['content']
+    tasks = Todo.query.filter(Todo.content.contains(search_query)).order_by(Todo.date_created).all()
+    return render_template('index.html', tasks=tasks)
 
 # DELETE TASK THROUGHT ID
 @app.route('/delete/<int:id>')
